@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='puttin the pussy on the chainwax')
+    meta(name='author', content='joshua a bertsche')
+    link(href='/stylesheets/main.css', rel='stylesheet', media='screen')
+  body
+    #container1
+      #title
+        h1 ReTweeTwee...
+        p description blah blah blah iuda oaufaou oadyofgsaofyo ayfgasfy fyg asuygfiafy ify asiuyasyd fasy fasuyd fagy faouysdfoayfd aos fausy fadyugfayufay fauyofaoufyqofy eoay feay fayfayfuadiufyaify yc
+      #container2
+        #tweetdiv
+          textarea#tweet(rows="3", readonly)
+        #choices
+          p: a(href='javascript:void(0);')#choice1
+          p: a(href='javascript:void(0);')#choice2
+          p: a(href='javascript:void(0);')#choice3
+          p: a(href='javascript:void(0);')#choice4
+          #loading loading...
+        #postbutton
+          #count (0/140)
+          button#posttweet(type='button') POST
+      #twitter_timeline
+        a(class="twitter-timeline", data-dnt="true", href="https://twitter.com/retweetwee", data-widget-id="487761719066759168") Tweets by @retweetwee
+        script(src='javascripts/embedded_timeline.js')
+
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='javascripts/main.js')

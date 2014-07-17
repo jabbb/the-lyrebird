@@ -1,0 +1,66 @@
+body {
+  background-image:url('/images/twitterClouds.gif');
+  font-family: helvetica, arial, sans-serif;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+
+#container1 {
+  text-align: center;
+  margin: 0px auto;
+  width:520px;
+  height: 1300px;
+  /*background-color:#FFFFFF;*/
+}
+
+#title {
+  margin: 0px auto;
+  width: 400px;
+}
+
+#container2 {
+  text-align: center;
+  background-color:#FFFFFF;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color:#E3E3E3;
+  min-height: 400px;
+  float: left;
+
+}
+
+#tweetdiv {
+  margin: 10px auto;
+
+}
+
+#tweet {
+  width: 490px;
+  font-size:30px;
+    resize: none;
+}
+
+#choices {
+  min-height: 164px;
+  width: 520px;
+  margin: 0px auto;
+}
+
+#postbutton{
+  margin: 0px auto;
+}
+
+#twitter_timeline{
+  margin: 450px auto;
+}
+
+#choice1, #choice2, #choice3, #choice4, #loading {
+  font-size:25px;
+}
+
+#posttweet {
+  font-size:30px;
+}
