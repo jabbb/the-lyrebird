@@ -8,8 +8,12 @@ var express = require('express'),
 // create express app  
 var app = express();
 
+// configure openshift
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || server_port);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -21,9 +25,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+//if ('development' == app.get('env')) {
+//  app.use(express.errorHandler());
+//}
 
 // routes
 app.get('/', routes.index);
@@ -33,6 +37,10 @@ app.get('/search0', routes.search0);
 app.post('/postTweet', routes.postTweet);
 
 // create server
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+//http.createServer(app).listen(app.get('port'), function(){
+//  console.log('Express server listening on port ' + app.get('port'));
+//});
+
+http.createServer(app).listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", server_port " + port )
 });
