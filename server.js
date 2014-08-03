@@ -9,8 +9,8 @@ var express = require('express'),
 var app = express();
 
 // configure openshift
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+//var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+//var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
 
 
 // all environments
@@ -28,9 +28,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
+/*if ('development' == app.get('env')) {
   app.use(express.errorHandler());
-}
+}*/
 
 // routes
 app.get('/', routes.index);
@@ -45,5 +45,5 @@ app.post('/postTweet', routes.postTweet);
 });*/
 
 server.listen(app.get('port'), app.get('ip'), function () {
-  console.log( "Listening on " + server_ip_address + ", server_port " + port )
+  console.log( "Listening on " + server_ip_address + ", server_port " + port );
 });
