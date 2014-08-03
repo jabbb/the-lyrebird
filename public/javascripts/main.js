@@ -1,13 +1,18 @@
 $(function () {
 
-  // initialize
-  var lastWord = '';
-  var tweet = '';
-  var choices = ['', '', '', ''];
+  var lastWord;
+  var tweet;
+  var choices;
+
+  function initialize() {
+  lastWord = '';
+  tweet = '';
+  choices = ['', '', '', ''];
     $("#choice1").hide();
     $("#choice2").hide();
     $("#choice3").hide();
     $("#choice4").hide();
+    $("#tweet").val(' ');
   $.get('/search0', function (data) {
       data = JSON.parse(data);
 
@@ -19,6 +24,7 @@ $(function () {
       $("#choice" + i).fadeIn();
       }
     });
+  }
 
   function searchTweets(n) {
     $("#choice1").hide();
@@ -29,9 +35,10 @@ $(function () {
 
     lastWord = choices[n];
     tweet = (tweet + lastWord + ' ');
-    $("#tweet").val( tweet );
+    $("#tweet").val(tweet);
+    $("#count").text((tweet.length - 1) + '/140');
 
-    $.post('/search', {'lastWord': JSON.stringify(lastWord)}, function (data) {
+    $.post('/search', {'lastWord': JSON.stringify(lastWord), 'Tlength': JSON.stringify(tweet.length)}, function (data) {
       data = JSON.parse(data);
 
       $("#loading").hide();
@@ -46,6 +53,8 @@ $(function () {
       }
     });
   }
+
+  initialize();
 
   // on click, run the search function
   $("#choice1").click(function () {
@@ -62,9 +71,8 @@ $(function () {
   });
 
   $("#postTweet").click(function () {
-    $.post('/postTweet', {'status': JSON.stringify(tweet)}, function (data) {
-      window.open('https://twitter.com/retweetwee');
-    });
+    $.post('/postTweet', {'status': JSON.stringify(tweet.substr(0, 140))}, function (data) {});
+    initialize();
   });
 
 

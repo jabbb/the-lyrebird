@@ -22,6 +22,8 @@ exports.search = function(req, res) {
 
 	// grab the request from the client
 	var word = JSON.parse(req.body.lastWord);
+	var Tlength = JSON.parse(req.body.Tlength);
+	//console.log(length);
 
 	// establish the twitter config (grab your keys at dev.twitter.com)
 	var twitter = new twit({
@@ -47,7 +49,7 @@ exports.search = function(req, res) {
 			// find next word
 			console.log(data.statuses.length);
 			for (var i = 0; i < data.statuses.length; i++) {
-				if (wordList.length <= 4) {
+				if (wordList.length < 4) {
 	        		var status = data.statuses[i].text.split(' ');
         			var index = -1;
         			for (var ii = 0; ii < status.length-1; ii++) {
@@ -66,7 +68,8 @@ exports.search = function(req, res) {
 
 	        		if (index > -1 && index < status.length /*- 1 necissary? */) {
 	            	//var newWord = status[index+1]
-	            		if (check(status[index+1]) != ''/* && wordList.length + status[index+1],length < 140*/) {
+	            	console.log(Tlength + status[index+1].length);
+	            		if (check(status[index+1]) != '' && Tlength + status[index+1].length < 140) {
 	            			wordList.push(status[index+1]);
 	            		}
 	        		}

@@ -17,7 +17,7 @@ server.listen(server_port, server_ip_address, function () {
 });
 
 // all environments
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -29,9 +29,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-//if ('development' == app.get('env')) {
-//  app.use(express.errorHandler());
-//}
+if ('development' == app.get('env')) {
+  app.use(express.errorHandler());
+}
 
 // routes
 app.get('/', routes.index);
