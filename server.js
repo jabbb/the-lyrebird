@@ -44,6 +44,6 @@ app.post('/postTweet', routes.postTweet);
   console.log('Express server listening on port ' + app.get('port'));
 });*/
 
-server.listen(app.get('port'), app.get('ipaddr'), function () {
-  console.log( "Listening on " + server_ip_address + ", server_port " + port );
+http.createServer(app).listen(app.get('port'), app.get('ipaddr'), function () {
+  console.log( "Listening on " + app.get('ipaddr') + ", server_port " + app.get('port') );
 });
