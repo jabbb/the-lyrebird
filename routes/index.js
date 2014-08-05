@@ -5,7 +5,7 @@ var oldWordList = [];
 //var config = require("config")
 
 exports.index = function(req, res){
-  res.render('index', { title: "ReTweeTwee..."});
+  res.render('index', { title: "THE LYREBIRD"});
 };
 
 exports.ping = function(req, res){
