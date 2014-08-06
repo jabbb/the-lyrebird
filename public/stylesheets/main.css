@@ -40,7 +40,8 @@ h1 {
 #tweet {
   width: 490px;
   font-size:30px;
-    resize: none;
+  resize: none;
+  text-align: center;
 }
 
 #choices {
