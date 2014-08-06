@@ -61,16 +61,16 @@ exports.search = function(req, res) {
 				//var word2 = fnd.exec(data.statuses[i].text.replace(/([.?*+^$[\]\\(){}|-])/g, ""));
 	        	//var index = status.indexOf(word2);
 
-	        	console.log(i + ' --------------------');
-	        	console.log('status: ' + data.statuses[i].text);
-	        	console.log('index: ' + index);
-	        	console.log('words: ' + status[index] + ' ' + status[index+1]);
+	        	//console.log(i + ' --------------------');
+	        	//console.log('status: ' + data.statuses[i].text);
+	        	//console.log('index: ' + index);
+	        	//console.log('words: ' + status[index] + ' ' + status[index+1]);
 
 	        		if (index > -1 && index < status.length /*- 1 necissary? */) {
 	            	//var newWord = status[index+1]
-	            	console.log(Tlength + status[index+1].length);
+	            	//console.log(Tlength + status[index+1].length);
 	            		if (check(status[index+1]) != '' && Tlength + status[index+1].length < 140) {
-	            			wordList.push(status[index+1]);
+	            			wordList.push(status[index+1].replace(/\r?\n|\r/g,""));
 	            		}
 	        		}
 	        	}
@@ -117,7 +117,7 @@ exports.search0 = function(req, res) {
 		for (var i = 0; i < data.statuses.length; i++) {
         	var status = data.statuses[i].text.split(' ');
         	if (check(status[0]) != '') {
-        		wordList.push(status[0]);
+	            wordList.push(status[0].replace(/\r?\n|\r/g,""));
         	}
     	}
   		// send choices to client
