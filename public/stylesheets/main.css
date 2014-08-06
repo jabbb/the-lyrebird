@@ -51,6 +51,7 @@ h1 {
 
 #postbutton{
   margin: 0px auto;
+  border-radius: 5px;
 }
 
 #twitter_timeline{
