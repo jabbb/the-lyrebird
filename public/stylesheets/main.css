@@ -51,7 +51,6 @@ h1 {
 
 #postbutton{
   margin: 0px auto;
-  border-radius: 5px;
 }
 
 #twitter_timeline{
@@ -59,9 +58,9 @@ h1 {
 }
 
 #choice1, #choice2, #choice3, #choice4, #loading {
-  font-size:25px;
+  font-size: 25px;
 }
 
 #postTweet {
-  font-size:30px;
+  font-size: 20px;
 }
