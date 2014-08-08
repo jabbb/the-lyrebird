@@ -12,7 +12,7 @@ $(function () {
     $("#choice2").hide();
     $("#choice3").hide();
     $("#choice4").hide();
-    $("#tweet").val('pick a word');
+    $("#tweet").val('(pick a word)');
   $.get('/search0', function (data) {
       data = JSON.parse(data);
 
