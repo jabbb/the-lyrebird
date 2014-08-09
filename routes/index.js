@@ -100,13 +100,14 @@ exports.search = function(req, res) {
 exports.search0 = function(req, res) {
 	//console.log(wordList);
 	wordList = [];
-	var rs = startWords[Math.floor((Math.random() * startWords.length))];
+	var rs = ""
+	//tartWords[Math.floor((Math.random() * startWords.length))];
 	//console.log(rs);
 	twitter.get('search/tweets', {q:rs, lang:'en', result_type:'popular', count:10}, function(err, data) {
 		if (err){
 			console.log('twit error: ' + err);
 		}
-		// find next word
+		// find first word
 		for (var i = 0; i < data.statuses.length; i++) {
         	var status = data.statuses[i].text.split(' ');
         	if (check(status[0]) != '') {
