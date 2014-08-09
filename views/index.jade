@@ -11,8 +11,11 @@ html
     #container1
       #title
         h1 The Lyrebird
+        //#bird
+          img(src="/images/lyrebird.jpg")
         //h2 (aka Retweetwee...)
-        p "A lyrebird is either of two species of ground-dwelling Australian birds, that form the genus, Menura, and the family Menuridae. <b>They are most notable for their superb ability to mimic natural and artificial sounds from their environment.</b>" - Wikipedia
+        #quote
+          dfn <font size="1">"A lyrebird is either of two species of ground-dwelling Australian birds, that form the genus, Menura, and the family Menuridae. </font><b>They are most notable for their superb ability to mimic natural and artificial sounds from their environment.</b><font size="1">" - some person on Wikipedia</font>
       #container2
         #tweetdiv
           textarea#tweet(rows="5", readonly)
@@ -24,10 +27,16 @@ html
           #loading loading...
         #postbutton
           #count (0/140)
-          button#postTweet(type='button') post to @thelyrebird
+          button#postTweet(type='button') Post to @the_lyrebird!
+      p: strong |
+      p: strong |
+      p: strong |
+      p: strong |
+      p: strong V
       #twitter_timeline
         a(class="twitter-timeline", data-dnt="true", href="https://twitter.com/retweetwee", data-widget-id="487761719066759168") Tweets by @retweetwee
         //script(src='javascripts/embedded_timeline.js')
+      img(src="/images/lyrebird.jpg")
 
     script(src='http://code.jquery.com/jquery-1.11.0.min.js')
     script(src='javascripts/main.js')

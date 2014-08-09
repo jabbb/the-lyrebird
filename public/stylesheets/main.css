@@ -1,35 +1,59 @@
 body {
-  background-image:url('/images/twitterClouds.gif');
+  background-image:url('/images/twitterClouds3.gif');
   font-family: helvetica, arial, sans-serif;
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 75px;
+  margin: 0px auto;
+  /*color: #0000EE;*/
+  margin-top: 25px;
 }
 
 
 #container1 {
+  padding: 20px 0px;
   text-align: center;
-  margin: 0px auto;
-  width:520px;
-  height: 1300px;
-  /*background-color:#FFFFFF;*/
+  margin: -10px auto;
+  width:760px;
+  /*height: 1300px;*/
+  /*background-color: #C0DEED;
+  /*border-radius: 5px;*/
+}
+
+#bird {
+  margin-top: -50px;
 }
 
 #title {
+  background-image:url('/images/lyrebird.jpg');
+  /*background-color: #F5F8FA;*/
   margin: 0px auto;
-  width: 400px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color:#E3E3E3;
+}
+
+#quote {
+  width: 520px;
+  margin: 30px auto 20px;
+  /*color: #0000EE;*/
+  background-color: #FFFFFF;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color:#E3E3E3;
+
 }
 
 #container2 {
   text-align: center;
-  background-color:#FFFFFF;
-    border: 1px solid;
-    border-radius: 5px;
-    border-color:#E3E3E3;
-  min-height: 400px;
-  float: left;
+  width:520px;
+  margin: 20px auto 0px;
+  background-color: #F5F8FA;
 
+  border: 1px solid;
+  border-radius: 5px;
+  border-color:#E3E3E3;
 }
 
 #tweetdiv {
@@ -45,17 +69,17 @@ h1 {
 }
 
 #choices {
-  height: 264px;
+  height: 180px;
   width: 520px;
   margin: 0px auto;
 }
 
 #postbutton{
-  margin: 0px auto;
+  margin: 10px auto;
 }
 
 #twitter_timeline{
-  margin: 450px auto;
+  margin: 20px auto;
 }
 
 #choice1, #choice2, #choice3, #choice4, #loading {
@@ -63,5 +87,5 @@ h1 {
 }
 
 #postTweet {
-  font-size: 20px;
+  font-size: 25px;
 }

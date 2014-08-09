@@ -8,11 +8,14 @@ $(function () {
   lastWord = '';
   tweet = '';
   choices = ['', '', '', ''];
-    $("#choice1").hide();
-    $("#choice2").hide();
-    $("#choice3").hide();
-    $("#choice4").hide();
-    $("#tweet").val('(pick a word)');
+  $("#choice1").hide();
+  $("#choice2").hide();
+  $("#choice3").hide();
+  $("#choice4").hide();
+  $("#tweet").val('\n\n(pick someone\'s word to start your tweet)');
+  $("#tweet").css({"color":"grey"});
+  $("#count").text("0/140");
+
   $.get('/search0', function (data) {
       data = JSON.parse(data);
 
@@ -32,6 +35,7 @@ $(function () {
     $("#choice3").hide();
     $("#choice4").hide();
     $("#loading").fadeIn();
+    $("#tweet").css({"color":"black"});
 
     lastWord = choices[n];
     tweet = (tweet + lastWord + ' ');
