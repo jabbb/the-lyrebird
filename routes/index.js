@@ -2,7 +2,15 @@ var path = require("path");
 var twit = require('twit');
 var wordList = [];
 var oldWordList = [];
-//var config = require("config")
+//var config = require("config.js")
+
+// establish the twitter config (grab your keys at dev.twitter.com)
+var twitter = new twit({
+	consumer_key: 'UYbvKeulY30ohy4eozz32cUxE',
+	consumer_secret: 'IZqvvLRoctjPWnpnOwwl31sf39Wq0pcrfy4VnnTjbbATeJkiOr',
+	access_token: '2426354677-JeSqmxSLSWASBUXQpYYTpOJlJk1HrRjR82VTIFG',
+	access_token_secret: 'Izq6qdwY9rlf1a0EgszxWjbd5WkQuoAYW9U1leE1IJ8aK'
+});
 
 exports.index = function(req, res){
   res.render('index', { title: "~~~~~~THE~LYREBIRD~~~~~~"});
@@ -25,15 +33,7 @@ exports.search = function(req, res) {
 	var Tlength = JSON.parse(req.body.Tlength);
 	//console.log(length);
 
-	// establish the twitter config (grab your keys at dev.twitter.com)
-	var twitter = new twit({
-    	consumer_key: 'UYbvKeulY30ohy4eozz32cUxE',
-    	consumer_secret: 'IZqvvLRoctjPWnpnOwwl31sf39Wq0pcrfy4VnnTjbbATeJkiOr',
-    	access_token: '2426354677-JeSqmxSLSWASBUXQpYYTpOJlJk1HrRjR82VTIFG',
-    	access_token_secret: 'Izq6qdwY9rlf1a0EgszxWjbd5WkQuoAYW9U1leE1IJ8aK'
-	});
-
-	twitter.get('search/tweets', {q: '%22' + word + '%22', lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
+	twitter.get('search/tweets', {q: '%22' + word.toLowerCase().replace(/[\.,-\/#!"?$%\^&\*;:{}=\-_`~()]/g,"") + '%22', lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
 			//console.log(data.statuses.text);
 			if (err) {
 				console.log('twit error: ' + err);
@@ -53,7 +53,7 @@ exports.search = function(req, res) {
 	        		var status = data.statuses[i].text.split(' ');
         			var index = -1;
         			for (var ii = 0; ii < status.length-1; ii++) {
-        				if (word.toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") == status[ii].toLowerCase().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"")) {
+        				if (word.toLowerCase().replace(/[\.,-\/#!"?$%\^&\*;:{}=\-_`~()]/g,"") == status[ii].toLowerCase().replace(/[\.,-\/#!"?$%\^&\*;:{}=\-_`~()]/g,"")) {
         					index = ii;
         				}
         			}
@@ -98,13 +98,6 @@ exports.search = function(req, res) {
 };
 
 exports.search0 = function(req, res) {
-	// establish the twitter config (grab your keys at dev.twitter.com)
-	var twitter = new twit({
-    	consumer_key: 'UYbvKeulY30ohy4eozz32cUxE',
-    	consumer_secret: 'IZqvvLRoctjPWnpnOwwl31sf39Wq0pcrfy4VnnTjbbATeJkiOr',
-    	access_token: '2426354677-JeSqmxSLSWASBUXQpYYTpOJlJk1HrRjR82VTIFG',
-    	access_token_secret: 'Izq6qdwY9rlf1a0EgszxWjbd5WkQuoAYW9U1leE1IJ8aK'
-	});
 	//console.log(wordList);
 	wordList = [];
 	var rs = startWords[Math.floor((Math.random() * startWords.length))];
@@ -132,13 +125,6 @@ exports.search0 = function(req, res) {
 
 exports.postTweet = function(req, res) {
 	console.log('postpostpost1!!!')
-	// establish the twitter config (grab your keys at dev.twitter.com)
-	var twitter = new twit({
-    	consumer_key: 'UYbvKeulY30ohy4eozz32cUxE',
-    	consumer_secret: 'IZqvvLRoctjPWnpnOwwl31sf39Wq0pcrfy4VnnTjbbATeJkiOr',
-    	access_token: '2426354677-JeSqmxSLSWASBUXQpYYTpOJlJk1HrRjR82VTIFG',
-    	access_token_secret: 'Izq6qdwY9rlf1a0EgszxWjbd5WkQuoAYW9U1leE1IJ8aK'
-	});
 
 	// grab the tweet from the client
 	var tweet = JSON.parse(req.body.status);
