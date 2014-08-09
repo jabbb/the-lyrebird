@@ -100,11 +100,9 @@ exports.search = function(req, res) {
 exports.search0 = function(req, res) {
 	//console.log(wordList);
 	wordList = [];
-	var rs = ""
-	//tartWords[Math.floor((Math.random() * startWords.length))];
+	var rs = startWords[Math.floor((Math.random() * startWords.length))];
 	//console.log(rs);
-	twitter.get('statuses/sample', function(err, data) {
-		//, {q:rs, lang:'en', result_type:'popular', count:10}, function(err, data) {
+	twitter.get('search/tweets', {q:rs, lang:'en', result_type:'popular', count:10}, function(err, data) {
 		if (err){
 			console.log('twit error: ' + err);
 		}
