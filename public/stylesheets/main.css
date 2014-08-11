@@ -74,6 +74,13 @@ h1 {
   margin: 10px auto;
 }
 
+#huh {
+  float: right;
+  font-size: 25px;
+  margin: -42px 20px;
+  text-decoration: none;
+}
+
 #twitter_timeline{
   margin: auto;
   background-color: #F5F8FA;
@@ -91,4 +98,9 @@ h1 {
 
 #postTweet {
   font-size: 25px;
+}
+
+#about {
+  width: 500px;
+  margin: auto;
 }
