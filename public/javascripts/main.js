@@ -3,6 +3,8 @@ $(function () {
   var lastWord;
   var tweet;
   var choices;
+  var names;
+  var dates;
 
   function initialize() {
   lastWord = '';
@@ -22,9 +24,10 @@ $(function () {
     $("#loading").hide();
       // append data to the DOM
       for (var i=1; i<5; i++){
-      choices[i-1] = data['choice' + i];
-      $("#choice" + i).text(choices[i-1]);
-      $("#choice" + i).fadeIn();
+        choices[i-1] = data['choice' + i];
+        $("#choice" + i).text(choices[i-1]);
+          $("#choice" + i).attr('title', 'Contributed by @' + data['user' + i]);
+        $("#choice" + i).fadeIn();
       }
     });
   }
@@ -50,15 +53,26 @@ $(function () {
       // append data to the DOM
       for (var i=1; i<5; i++){
         if (data['choice' + i]) {
-        choices[i-1] = data['choice' + i];
-        $("#choice" + i).text(choices[i-1]);
-        $("#choice" + i).fadeIn();
+          choices[i-1] = data['choice' + i];
+          $("#choice" + i).text(choices[i-1]);
+          $("#choice" + i).attr('title', 'Contributed by @' + data['user' + i]);
+          $("#choice" + i).fadeIn();
         }
+        /*var now = new Date();
+        var date = Date.parse(data['date' + i]);
+        var timeSince = (now - date)/100;
+        var minSince = Math.floor(timeSince/60);
+        var SecSince = timeSince - (minSince * 60);
+        $("#choice" + i).attr('title', 'Contributed by \'' + data['name' + i] + '\' ' + minSince + 'minutes and ' + SecSince + ' seconds ago');*/
       }
     });
   }
 
   initialize();
+  $("#choice1").tooltip();
+  $("#choice2").tooltip();
+  $("#choice3").tooltip();
+  $("#choice4").tooltip();
 
   // on click, run the search function
   $("#choice1").click(function () {

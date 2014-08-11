@@ -1,7 +1,10 @@
 var path = require("path");
 var twit = require('twit');
 var wordList = [];
-var oldWordList = [];
+//var oldWordList = [];
+var nameList = [];
+var dateList = [];
+var userList = [];
 //var config = require("config.js")
 
 // establish the twitter config (grab your keys at dev.twitter.com)
@@ -33,16 +36,18 @@ exports.search = function(req, res) {
 	var Tlength = JSON.parse(req.body.Tlength);
 	//console.log(length);
 
-	twitter.get('search/tweets', {q: '%22' + word.toLowerCase().replace(/[\.,-\/#!"?$%\^&\*;:{}=\-_`~()]/g,"") + '%22', lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
-			//console.log(data.statuses.text);
+	twitter.get('search/tweets', {q: '%22' + word.toLowerCase().replace(/[\.,-\/#!"\[\]?$%\^&\*;:{}=\-_`~()]/g,"") + '%22', lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
+			//console.log(data);
 			if (err) {
 				console.log('twit error: ' + err);
 			}
 			if (data) {
 			//clear wordList
-			oldWordList = wordList;
+			//oldWordList = wordList;
 			wordList = [];
-			console.log('@@@@@: ' + wordList);
+			nameList = [];
+			userList = [];
+			//console.log('@@@@@: ' + wordList);
 
 				//var fnd = new RegExp(word,'i');
 
@@ -50,6 +55,14 @@ exports.search = function(req, res) {
 			console.log(data.statuses.length);
 			for (var i = 0; i < data.statuses.length; i++) {
 				if (wordList.length < 4) {
+					console.log(data.statuses[i]);
+
+					var name = data.statuses[i].user.name;
+					var user = data.statuses[i].user.screen_name;
+					//var screenName = data.statuses[i].user.screen_name;
+					//var location = data.statuses[i].user.location;
+					//var date = data.statuses[i].created_at;
+
 	        		var status = data.statuses[i].text.split(' ');
         			var index = -1;
         			for (var ii = 0; ii < status.length-1; ii++) {
@@ -58,39 +71,33 @@ exports.search = function(req, res) {
         				}
         			}
 
-				//var word2 = fnd.exec(data.statuses[i].text.replace(/([.?*+^$[\]\\(){}|-])/g, ""));
-	        	//var index = status.indexOf(word2);
-
-	        	//console.log(i + ' --------------------');
-	        	//console.log('status: ' + data.statuses[i].text);
-	        	//console.log('index: ' + index);
-	        	//console.log('words: ' + status[index] + ' ' + status[index+1]);
-
 	        		if (index > -1 && index < status.length /*- 1 necissary? */) {
 	            	//var newWord = status[index+1]
 	            	//console.log(Tlength + status[index+1].length);
-	            		if (check(status[index+1]) != '' && Tlength + status[index+1].length < 140) {
+	            		if (check(status[index+1]) && Tlength + status[index+1].length < 140) {
 	            			wordList.push(status[index+1].replace(/\r?\n|\r/g,""));
+	            			nameList.push(name);
+	            			userList.push(user);
+	            			//dateList.push(date);
 	            		}
 	        		}
 	        	}
 	    	}
-	    	//var oldWordList = wordList
-	    	if (wordList == oldWordList){
-	    		console.log('it found the same words!');
-	    	}
 	  		// send choices to client
-			//if (wordList.length >= 4) {
-				console.log('^^|' + wordList + '|^^');
-				res.end(JSON.stringify({
-	  				'choice1': wordList[0],
-	  				'choice2': wordList[1],
-	  				'choice3': wordList[2],
-	  				'choice4': wordList[3]
-  				}))
-			//} else {
-				//console.log('too short: ' + wordList.length);
-			//}
+			res.send(JSON.stringify({
+				'choice1': wordList[0],
+				'choice2': wordList[1],
+				'choice3': wordList[2],
+				'choice4': wordList[3],
+				'name1': nameList[0],
+				'name2': nameList[1],
+				'name3': nameList[2],
+				'name4': nameList[3],
+				'user1': userList[0],
+				'user2': userList[1],
+				'user3': userList[2],
+				'user4': userList[3]
+			}));
 		} else {
 			console.log('WHAT???? THERE WAS NO DATA!!!');
 		}
@@ -109,31 +116,40 @@ exports.search0 = function(req, res) {
 		// find first word
 		for (var i = 0; i < data.statuses.length; i++) {
         	var status = data.statuses[i].text.split(' ');
-        	if (check(status[0]) != '') {
+        	if (check(status[0])) {
 	            wordList.push(status[0].replace(/\r?\n|\r/g,""));
+	            nameList.push(data.statuses[i].user.name);
+	            userList.push(data.statuses[i].user.screen_name);
         	}
     	}
   		// send choices to client
   		res.send(JSON.stringify({
-  			'choice1': wordList[0],
-  			'choice2': wordList[1],
-  			'choice3': wordList[2],
-  			'choice4': wordList[3]
-  		}));
+			'choice1': wordList[0],
+			'choice2': wordList[1],
+			'choice3': wordList[2],
+			'choice4': wordList[3],
+			'name1': nameList[0],
+			'name2': nameList[1],
+			'name3': nameList[2],
+			'name4': nameList[3],
+			'user1': userList[0],
+			'user2': userList[1],
+			'user3': userList[2],
+			'user4': userList[3]
+		}));
 	})
 };
 
 exports.postTweet = function(req, res) {
-	console.log('postpostpost1!!!')
-
 	// grab the tweet from the client
 	var tweet = JSON.parse(req.body.status);
-
 	twitter.post('statuses/update', { status: tweet }, function(err, data){
-		console.log(data);
-		console.log(err);
+		//console.log(data);
+		//console.log(err);
 	})
 };
+
+
 
 var startWords = [
 'sun',
@@ -202,13 +218,10 @@ var startWords = [
 var badWords = [' '];
 
 var check = function(newWord) {
-	//console.log("what?" + ' ' + twt +' ' + wordList);
 	if (badWords.indexOf(newWord) == -1 && wordList.indexOf(newWord) == -1) {
-		//console.log('hi'+ wordList.indexOf(twt));
-		return newWord;
+		return true;
 	} else {
-		//console.log('bye');
-		return "";
+		return false;
 	}
 }
 

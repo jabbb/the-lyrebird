@@ -7,6 +7,7 @@ html
     meta(name='description', content='puttin the pussy on the chainwax')
     meta(name='author', content='joshua a bertsche')
     link(href='/stylesheets/main.css', rel='stylesheet', media='screen')
+    link(rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")
   body
     #container1
       #title
@@ -18,16 +19,17 @@ html
           p
           dfn <font size="2">"A lyrebird is either of two species of ground-dwelling Australian birds, that form the genus, Menura, and the family Menuridae. </font><b>They are most notable for their superb ability to mimic natural and artificial sounds from their environment.</b><font size="2">" - some person on Wikipedia</font>
           p
+          p ---
           dfn <b>"I don't get Twitter. What do you write? I mean, what's the point anyway?"</b><font size="2"> - some person on the telephone</font>
           p
       #container2
         #tweetdiv
           textarea#tweet(rows="5", readonly)
         #choices
-          p: a(href='javascript:void(0);')#choice1
-          p: a(href='javascript:void(0);')#choice2
-          p: a(href='javascript:void(0);')#choice3
-          p: a(href='javascript:void(0);')#choice4
+          p: a(href='javascript:void(0)', title='1')#choice1
+          p: a(href='javascript:void(0)', title='2')#choice2
+          p: a(href='javascript:void(0)', title='3')#choice3
+          p: a(href='javascript:void(0)', title='4')#choice4
           #loading loading...
         #postbutton
           #count (0/140)
