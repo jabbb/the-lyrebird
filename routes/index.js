@@ -26,20 +26,18 @@ exports.ping = function(req, res){
 exports.search = function(req, res) {
 	//console.log("we got: " + req.body.lastWord);
 
-	var dayRange = function(m){
-		var today = new Date();
-		return('' + today.getFullYear() + '-' + (today.getMonth() - m) + '-' + (today.getDate()));
-	}
-
 	// grab the request from the client
 	var word = JSON.parse(req.body.lastWord);
+	var encodedWord = encodeURIComponent(word);
 	var Tlength = JSON.parse(req.body.Tlength);
 	//console.log(length);
+	var finished = false;
 
-	twitter.get('search/tweets', {q: '%22' + word.toLowerCase().replace(/[\.,-\/#!"\[\]?$%\^&\*;:{}=\-_`~()]/g,"") + '%22', lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
+	twitter.get('search/tweets', {q: encodedWord/*word.toLowerCase().replace(/[\.,-\/#!"\[\]?$%\^&\*;:{}=\-_`~()]/g,"")*/, lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
 			//console.log(data);
 			if (err) {
 				console.log('twit error: ' + err);
+				res.send(JSON.stringify({'error': 2}));
 			}
 			if (data) {
 			//clear wordList
@@ -52,10 +50,10 @@ exports.search = function(req, res) {
 				//var fnd = new RegExp(word,'i');
 
 			// find next word
-			console.log(data.statuses.length);
+			//console.log(data.statuses.length);
 			for (var i = 0; i < data.statuses.length; i++) {
 				if (wordList.length < 4) {
-					console.log(data.statuses[i]);
+					//console.log(data.statuses[i]);
 
 					var name = data.statuses[i].user.name;
 					var user = data.statuses[i].user.screen_name;
@@ -75,13 +73,17 @@ exports.search = function(req, res) {
 	            	//var newWord = status[index+1]
 	            	//console.log(Tlength + status[index+1].length);
 	            		if (check(status[index+1]) && Tlength + status[index+1].length < 140) {
-	            			wordList.push(status[index+1].replace(/\r?\n|\r/g,""));
+	            			wordList.push(decodeURIComponent(status[index+1].replace(/\r?\n|\r/g,"")));
 	            			nameList.push(name);
 	            			userList.push(user);
 	            			//dateList.push(date);
 	            		}
 	        		}
 	        	}
+	    	}
+	    	if (wordList.length == 0){
+			console.log('HUH? THERE WERE NO RESULTS!!!');
+			res.send(JSON.stringify({'error': 1}));
 	    	}
 	  		// send choices to client
 			res.send(JSON.stringify({
@@ -100,6 +102,7 @@ exports.search = function(req, res) {
 			}));
 		} else {
 			console.log('WHAT???? THERE WAS NO DATA!!!');
+			res.send(JSON.stringify({'error': 2}));
 		}
 	})
 };
@@ -112,6 +115,7 @@ exports.search0 = function(req, res) {
 	twitter.get('search/tweets', {q:rs, lang:'en', result_type:'popular', count:10}, function(err, data) {
 		if (err){
 			console.log('twit error: ' + err);
+			res.send(JSON.stringify({'error': 2}));
 		}
 		// find first word
 		for (var i = 0; i < data.statuses.length; i++) {

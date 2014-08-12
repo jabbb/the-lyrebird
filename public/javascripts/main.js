@@ -17,6 +17,7 @@ $(function () {
   $("#tweet").val('\n\n(pick someone\'s word to start your tweet)');
   $("#tweet").css({"color":"grey"});
   $("#count").text("0/140");
+  $("#loading").text('loading...');
 
   $.get('/search0', function (data) {
       data = JSON.parse(data);
@@ -33,6 +34,7 @@ $(function () {
   }
 
   function searchTweets(n) {
+    var attempt = 1;
     $("#choice1").hide();
     $("#choice2").hide();
     $("#choice3").hide();
@@ -40,16 +42,22 @@ $(function () {
     $("#loading").fadeIn();
     $("#tweet").css({"color":"black"});
 
+    if (attempt = 1){
     lastWord = choices[n];
     tweet = (tweet + lastWord + ' ');
     $("#tweet").val(tweet);
     $("#count").text((tweet.length - 1) + '/140');
+  }
 
     $.post('/search', {'lastWord': JSON.stringify(lastWord), 'Tlength': JSON.stringify(tweet.length)}, function (data) {
       data = JSON.parse(data);
 
+      if (data['error'] == 1) {
+        $("#loading").text('oops! no results');
+      } else if (data['error'] == 2) {
+        $("#loading").text('hmm... something messed up');
+      } else {
       $("#loading").hide();
-
       // append data to the DOM
       for (var i=1; i<5; i++){
         if (data['choice' + i]) {
@@ -58,6 +66,7 @@ $(function () {
           $("#choice" + i).attr('title', 'Contributed by @' + data['user' + i]);
           $("#choice" + i).fadeIn();
         }
+      } 
         /*var now = new Date();
         var date = Date.parse(data['date' + i]);
         var timeSince = (now - date)/100;
