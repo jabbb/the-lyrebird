@@ -28,12 +28,12 @@ exports.search = function(req, res) {
 
 	// grab the request from the client
 	var word = JSON.parse(req.body.lastWord);
-	var encodedWord = encodeURIComponent(word);
+	var encodedWord = encodeURIComponent(word.toLowerCase().replace(/[\.,-\/#!"\[\]?$%\^&\*;:{}=\-_`~()]/g,""));
 	var Tlength = JSON.parse(req.body.Tlength);
 	//console.log(length);
 	var finished = false;
 
-	twitter.get('search/tweets', {q: encodedWord/*word.toLowerCase().replace(/[\.,-\/#!"\[\]?$%\^&\*;:{}=\-_`~()]/g,"")*/, lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
+	twitter.get('search/tweets', {q: encodedWord, lang: 'en', /*result_type: 'popular',*/ /*since: dayRange(1), */count: 100}, function(err, data) {
 			//console.log(data);
 			if (err) {
 				console.log('twit error: ' + err);
@@ -90,11 +90,11 @@ exports.search = function(req, res) {
 				'choice1': wordList[0],
 				'choice2': wordList[1],
 				'choice3': wordList[2],
-				'choice4': wordList[3],
+				'choice4': wordList[3],/*
 				'name1': nameList[0],
 				'name2': nameList[1],
 				'name3': nameList[2],
-				'name4': nameList[3],
+				'name4': nameList[3],*/
 				'user1': userList[0],
 				'user2': userList[1],
 				'user3': userList[2],
@@ -131,11 +131,11 @@ exports.search0 = function(req, res) {
 			'choice1': wordList[0],
 			'choice2': wordList[1],
 			'choice3': wordList[2],
-			'choice4': wordList[3],
+			'choice4': wordList[3],/*
 			'name1': nameList[0],
 			'name2': nameList[1],
 			'name3': nameList[2],
-			'name4': nameList[3],
+			'name4': nameList[3],*/
 			'user1': userList[0],
 			'user2': userList[1],
 			'user3': userList[2],

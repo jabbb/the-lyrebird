@@ -14,7 +14,7 @@ $(function () {
   $("#choice2").hide();
   $("#choice3").hide();
   $("#choice4").hide();
-  $("#tweet").val('\n\n(pick someone\'s word to start your tweet)');
+  $("#tweet").val('\n\n(pick a word to start your tweet)');
   $("#tweet").css({"color":"grey"});
   $("#count").text("0/140");
   $("#loading").text('loading...');
