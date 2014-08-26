@@ -5,15 +5,8 @@ var wordList = [];
 var nameList = [];
 var dateList = [];
 var userList = [];
-//var config = require("config.js")
-
-// establish the twitter config (grab your keys at dev.twitter.com)
-var twitter = new twit({
-	consumer_key: 'UYbvKeulY30ohy4eozz32cUxE',
-	consumer_secret: 'IZqvvLRoctjPWnpnOwwl31sf39Wq0pcrfy4VnnTjbbATeJkiOr',
-	access_token: '2426354677-JeSqmxSLSWASBUXQpYYTpOJlJk1HrRjR82VTIFG',
-	access_token_secret: 'Izq6qdwY9rlf1a0EgszxWjbd5WkQuoAYW9U1leE1IJ8aK'
-});
+var config = require("config.js");
+var twitter = new twit(config);
 
 exports.index = function(req, res){
   res.render('index', { title: "~~~~~~THE~LYREBIRD~~~~~~"});
@@ -112,12 +105,13 @@ exports.search0 = function(req, res) {
 	wordList = [];
 	var rs = startWords[Math.floor((Math.random() * startWords.length))];
 	//console.log(rs);
-	twitter.get('search/tweets', {q:rs, lang:'en', result_type:'popular', count:10}, function(err, data) {
+	twitter.get('search/tweets', {q:rs, lang:'en', result_type:'popular', count:50}, function(err, data) {
 		if (err){
 			console.log('twit error: ' + err);
 			res.send(JSON.stringify({'error': 2}));
 		}
 		// find first word
+		while (wordList.length <= 4){
 		for (var i = 0; i < data.statuses.length; i++) {
         	var status = data.statuses[i].text.split(' ');
         	if (check(status[0])) {
@@ -126,6 +120,7 @@ exports.search0 = function(req, res) {
 	            userList.push(data.statuses[i].user.screen_name);
         	}
     	}
+    }
   		// send choices to client
   		res.send(JSON.stringify({
 			'choice1': wordList[0],

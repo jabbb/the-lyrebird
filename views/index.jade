@@ -3,7 +3,7 @@ html
   head
     title= title
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='viewport', content='width=device-width, maximum-scale=1')
     meta(name='description', content='puttin the pussy on the chainwax')
     meta(name='author', content='joshua a bertsche')
     link(href='/stylesheets/main.css', rel='stylesheet', media='screen')
@@ -17,7 +17,7 @@ html
         //h2 (aka Retweetwee...)
         #quote
           p
-          dfn <font size="2">"A lyrebird is either of two species of ground-dwelling Australian birds, that form the genus, Menura, and the family Menuridae. </font><b>They are most notable for their superb ability to mimic natural and artificial sounds from their environment.</b><font size="2">" - some person posting on Wikipedia</font>
+          dfn <font size="2">"A lyrebird is either of two species of ground-dwelling Australian birds, that form the genus, Menura, and the family Menuridae. </font><b>They are most notable for their superb ability to mimic natural and artificial sounds from their environment.</b><font size="2">" - a person posting on Wikipedia</font>
           p
           p ---
           dfn <b>"I don't get Twitter. What do you write? I mean, what's the point anyway?"</b><font size="2"> - a friend speaking on the telephone</font>
@@ -41,8 +41,8 @@ html
       //p: strong |
       //p: strong V
       #twitter_timeline
-        a(class="twitter-timeline", data-dnt="true", href="https://twitter.com/retweetwee", data-widget-id="487761719066759168", data-chrome="transparent") Tweets by @retweetwee
-        //script(src='javascripts/embedded_timeline.js')
+        a(class="twitter-timeline", data-dnt="true", href="https://twitter.com/retweetwee", data-widget-id="487761719066759168", data-chrome="transparent nofooter") Tweets by @retweetwee
+        script(src='javascripts/embedded_timeline.js')
       #about
         p: b *So, what's going on here?
         p Each time you pick a word, the server searches Twitter for 4 recent instances of that word and, for each, returns the following word (which make up the 4 new choices). This way, each pair of consecutive words in your post have been posted (presumably in a way that makes some vague sort of grammatical sense) as part of a tweet by someone somewhere at some point within the last couple hours.
@@ -50,4 +50,4 @@ html
     script(src='http://code.jquery.com/jquery-1.11.0.min.js')
     script(src='http://code.jquery.com/ui/1.11.0/jquery-ui.js')
     script(src='javascripts/main.js')
-    script(src='javascripts/embedded_timeline.js')
+    //script(src='javascripts/embedded_timeline.js')
