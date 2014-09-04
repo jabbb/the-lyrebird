@@ -27,9 +27,9 @@ $(function() {
             $("#loading").hide();
             // append data to the DOM
             for (var i = 1; i < 5; i++) {
-                choices[i - 1] = decodeURIComponent(data['choice' + i]);
-                $("#choice" + i).text(choices[i - 1]);
-                $("#choice" + i).attr('title', 'Contributed by @' + data['user' + i]);
+                choices[i - 1] = data['choice' + i];
+                $("#choice" + i).html(choices[i - 1]);
+                $("#choice" + i).attr('title', '@' + data['user' + i]);
                 $("#choice" + i).fadeIn();
             }
         });
@@ -68,9 +68,9 @@ $(function() {
                 // append data to the DOM
                 for (var i = 1; i < 5; i++) {
                     if (data['choice' + i]) {
-                        choices[i - 1] = decodeURIComponent(data['choice' + i]);
-                        $("#choice" + i).text(choices[i - 1]);
-                        $("#choice" + i).attr('title', 'Contributed by @' + data['user' + i]);
+                        choices[i - 1] = data['choice' + i];
+                        $("#choice" + i).html(choices[i - 1]);
+                        $("#choice" + i).attr('title', '@' + data['user' + i]);
                         $("#choice" + i).fadeIn();
                     }
                 }
