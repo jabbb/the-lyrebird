@@ -59,9 +59,14 @@ h1 {
 
 #tweet {
   width: 490px;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: auto;
   font-size:25px;
   resize: none;
   text-align: center;
+  background-color: #ffffff;
 }
 
 #choices {

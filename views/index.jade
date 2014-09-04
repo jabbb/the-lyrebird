@@ -8,6 +8,7 @@ html
     meta(name='author', content='joshua a bertsche')
     link(href='/stylesheets/main.css', rel='stylesheet', media='screen')
     link(rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css")
+    link(href='stylesheets/MinEmoji.css', rel='stylesheet')
   body
     #container1
       #title
@@ -21,7 +22,8 @@ html
           p
       #container2
         #tweetdiv
-          textarea#tweet(rows="5", readonly)
+          //textarea#tweet(rows="5", readonly)
+          #tweet
         #choices
           p: a(href='javascript:void(0)', title='1')#choice1
           p: a(href='javascript:void(0)', title='2')#choice2
@@ -38,7 +40,10 @@ html
       #about
         p: b *So, what's going on here?
         p Each time you pick a word, the server searches Twitter for 4 recent instances of that word and, for each, returns the following word (which make up the 4 new choices). This way, each pair of consecutive words in your post have been posted (presumably in a way that makes some vague sort of grammatical sense) as part of a tweet by someone somewhere at some point within the last couple hours.
-        p 
+        br
+        br
+        p (This site uses <a href="https://github.com/rodrigopolo/minEmoji">MinEmoji</a> by Rodrigo Polo in order to display emoji in Google Chrome.)
     script(src='http://code.jquery.com/jquery-1.11.0.min.js')
     script(src='http://code.jquery.com/ui/1.11.0/jquery-ui.js')
+    script(src='javascripts/jMinEmoji.js')
     script(src='javascripts/main.js')

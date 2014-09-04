@@ -14,7 +14,7 @@ $(function() {
         $("#choice2").hide();
         $("#choice3").hide();
         $("#choice4").hide();
-        $("#tweet").val('\n\n(pick a word to start your tweet)');
+        $("#tweet").html('<br><br>(pick a word to start your tweet)');
         $("#tweet").css({
             "color": "grey"
         });
@@ -30,6 +30,7 @@ $(function() {
                 choices[i - 1] = data['choice' + i];
                 $("#choice" + i).html(choices[i - 1]);
                 $("#choice" + i).attr('title', '@' + data['user' + i]);
+                $("#choice" + i).minEmoji();
                 $("#choice" + i).fadeIn();
             }
         });
@@ -49,7 +50,8 @@ $(function() {
         if (attempt = 1) {
             lastWord = choices[n];
             tweet = (tweet + lastWord + ' ');
-            $("#tweet").val(tweet);
+            $("#tweet").html(tweet);
+            $("#tweet").minEmoji();
             $("#count").text((tweet.length - 1) + '/140');
         }
 
@@ -60,9 +62,9 @@ $(function() {
             data = JSON.parse(data);
 
             if (data['error'] == 1) {
-                $("#loading").text('Huh, there were no results.');
+                $("#loading").html('Bummer, no results :(<br><br><br>(You can still post what you\'ve got though.)');
             } else if (data['error'] == 2) {
-                $("#loading").text('Uh oh, something messed up.');
+                $("#loading").html('Uh oh, something messed up!');
             } else {
                 $("#loading").hide();
                 // append data to the DOM
@@ -71,6 +73,7 @@ $(function() {
                         choices[i - 1] = data['choice' + i];
                         $("#choice" + i).html(choices[i - 1]);
                         $("#choice" + i).attr('title', '@' + data['user' + i]);
+                        $("#choice" + i).minEmoji();
                         $("#choice" + i).fadeIn();
                     }
                 }
