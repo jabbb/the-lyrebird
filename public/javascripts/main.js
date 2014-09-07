@@ -14,7 +14,7 @@ $(function() {
         $("#choice2").hide();
         $("#choice3").hide();
         $("#choice4").hide();
-        $("#tweet").html('<br><br>(pick a word to start your tweet)');
+        $("#tweet").html('<br><br>(chose a word below to start your tweet)');
         $("#tweet").css({
             "color": "grey"
         });
