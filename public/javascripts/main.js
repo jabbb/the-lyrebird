@@ -2,18 +2,12 @@ $(function() {
 
     $("#huh").tooltipster({
         content: 'about',
-        position: 'right',
-        interactive: true,
-        iconTouch: true,
-        icon: ' ~'
+        position: 'right'
     });
 
     $("#restart").tooltipster({
         content: 'restart',
-        position: 'left',
-        interactive: true,
-        iconTouch: true,
-        icon: '~ '
+        position: 'left'
     });
 
     initialize();
@@ -23,6 +17,7 @@ $(function() {
         $("#count").text("0/140");
         $("#loading").text('loading...');
         $(".choice").remove();
+        $(".tooltipster-icon").remove();
 
         $.get('/search0', function(data) {
             data = JSON.parse(data);
@@ -41,15 +36,12 @@ $(function() {
                     content: userInfo,
                     contentAsHTML: true,
                     interactive: true,
-                    iconTouch: true,
-                    icon: ' >'
+                    iconTouch: true
                 });
                 $("#choices").append("<br class='choice'>");
-                $(".choice").hide();
 
             }
             $(".choice").minEmoji();
-            $(".choice").fadeIn();
 
         });
     }
@@ -66,6 +58,7 @@ $(function() {
         var tweet = ($("#tweet").text() + lastWord + ' ');
 
         $(".choice").remove();
+        $(".tooltipster-icon").remove();
         $("#loading").fadeIn();
         $("#tweet").html(tweet);
         $("#tweet").minEmoji();
@@ -94,8 +87,7 @@ $(function() {
                         content: userInfo,
                         contentAsHTML: true,
                         interactive: true,
-                        iconTouch: true,
-                        icon: ' >'
+                        iconTouch: true
                     });
                     $("#choices").append("<br class='choice'>");
                 }
