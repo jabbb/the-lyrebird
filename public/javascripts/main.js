@@ -1,110 +1,115 @@
 $(function() {
 
-    var lastWord;
-    var tweet;
-    var choices;
-    var names;
-    var dates;
+    $("#huh").tooltipster({
+        content: 'about',
+        position: 'right',
+        interactive: true,
+        iconTouch: true,
+        icon: ' ~'
+    });
+
+    $("#restart").tooltipster({
+        content: 'restart',
+        position: 'left',
+        interactive: true,
+        iconTouch: true,
+        icon: '~ '
+    });
+
+    initialize();
 
     function initialize() {
-        lastWord = '';
-        tweet = '';
-        choices = ['', '', '', ''];
-        $("#choice1").hide();
-        $("#choice2").hide();
-        $("#choice3").hide();
-        $("#choice4").hide();
-        $("#tweet").html('<br><br>(chose a word below to start your tweet)');
-        $("#tweet").css({
-            "color": "grey"
-        });
+        $("#tweet").text("");
         $("#count").text("0/140");
         $("#loading").text('loading...');
+        $(".choice").remove();
 
         $.get('/search0', function(data) {
             data = JSON.parse(data);
+            $("#twitter-widget-0").width(590);
 
+            //$("#tweet").html("");
             $("#loading").hide();
+
             // append data to the DOM
-            for (var i = 1; i < 5; i++) {
-                choices[i - 1] = data['choice' + i];
-                $("#choice" + i).html(choices[i - 1]);
-                $("#choice" + i).attr('title', '@' + data['user' + i]);
-                $("#choice" + i).minEmoji();
-                $("#choice" + i).fadeIn();
+            for (var i = 0; i < data.length; i++) {
+                var newChoice = $("<a href='javascript:void(0)' class='choice'></a>").text(data[i].word);
+                var userInfo = $("<a class='toolTip' href='https://twitter.com/" + data[i].user + "' class='toolTip'>by @" + data[i].user + "</a>").css("color", "#666666");
+                $("#choices").append(newChoice);
+                $(newChoice).tooltipster({
+                    position: 'right',
+                    content: userInfo,
+                    contentAsHTML: true,
+                    interactive: true,
+                    iconTouch: true,
+                    icon: ' >'
+                });
+                $("#choices").append("<br class='choice'>");
+                $(".choice").hide();
+
             }
+            $(".choice").minEmoji();
+            $(".choice").fadeIn();
+
         });
     }
 
-    function searchTweets(n) {
-        var attempt = 1;
-        $("#choice1").hide();
-        $("#choice2").hide();
-        $("#choice3").hide();
-        $("#choice4").hide();
-        $("#loading").fadeIn();
-        $("#tweet").css({
-            "color": "black"
-        });
 
-        if (attempt = 1) {
-            lastWord = choices[n];
-            tweet = (tweet + lastWord + ' ');
-            $("#tweet").html(tweet);
-            $("#tweet").minEmoji();
-            $("#count").text((tweet.length - 1) + '/140');
-        }
+
+
+    $("#choices").on("click", ".choice", function() {
+
+        $("#twitter-widget-0").width(590);
+        $("#intro").hide();
+
+        var lastWord = $(this).text();
+        var tweet = ($("#tweet").text() + lastWord + ' ');
+
+        $(".choice").remove();
+        $("#loading").fadeIn();
+        $("#tweet").html(tweet);
+        $("#tweet").minEmoji();
+        $("#count").text((tweet.length - 1) + '/140');
 
         $.post('/search', {
             'lastWord': JSON.stringify(lastWord),
-            'Tlength': JSON.stringify(tweet.length)
+            'twtLength': JSON.stringify(tweet.length)
         }, function(data) {
             data = JSON.parse(data);
 
-            if (data['error'] == 1) {
-                $("#loading").html('Bummer, no results :(<br><br><br>(You can still post what you\'ve got though.)');
-            } else if (data['error'] == 2) {
+            if (data.error == 1) {
+                $("#loading").html('<br>Bummer, no results :(<br><br>(You can still post what you\'ve got though.)').css("color", "grey");
+            } else if (data.error == 2) {
                 $("#loading").html('Uh oh, something messed up!');
             } else {
                 $("#loading").hide();
                 // append data to the DOM
-                for (var i = 1; i < 5; i++) {
-                    if (data['choice' + i]) {
-                        choices[i - 1] = data['choice' + i];
-                        $("#choice" + i).html(choices[i - 1]);
-                        $("#choice" + i).attr('title', '@' + data['user' + i]);
-                        $("#choice" + i).minEmoji();
-                        $("#choice" + i).fadeIn();
-                    }
+                for (var i = 0; i < data.length; i++) {
+                    //if (data['choice' + i]) {
+                    var newChoice = $("<a href='javascript:void(0)' class='choice'></a>").html(data[i].word).attr("title", "by @" + data[i].user);
+                    var userInfo = $("<a class='toolTip' href='https://twitter.com/" + data[i].user + "' class='toolTip'>by @" + data[i].user + "</a>").css("color", "#666666");
+                    $("#choices").append(newChoice);
+                    $(newChoice).tooltipster({
+                        position: 'right',
+                        content: userInfo,
+                        contentAsHTML: true,
+                        interactive: true,
+                        iconTouch: true,
+                        icon: ' >'
+                    });
+                    $("#choices").append("<br class='choice'>");
                 }
-                /*var now = new Date();
-        var date = Date.parse(data['date' + i]);
-        var timeSince = (now - date)/100;
-        var minSince = Math.floor(timeSince/60);
-        var SecSince = timeSince - (minSince * 60);
-        $("#choice" + i).attr('title', 'Contributed by \'' + data['name' + i] + '\' ' + minSince + 'minutes and ' + SecSince + ' seconds ago');*/
+                //}
+
+                $(".choice").minEmoji();
+                $(".choice").fadeIn();
+
             }
         });
-    }
+    });
 
-    initialize();
-    $("#choice1").tooltip();
-    $("#choice2").tooltip();
-    $("#choice3").tooltip();
-    $("#choice4").tooltip();
-
-    // on click, run the search function
-    $("#choice1").click(function() {
-        searchTweets(0)
-    });
-    $("#choice2").click(function() {
-        searchTweets(1)
-    });
-    $("#choice3").click(function() {
-        searchTweets(2)
-    });
-    $("#choice4").click(function() {
-        searchTweets(3)
+    $("#restart").click(function() {
+        initialize();
     });
 
     $("#postTweet").click(function() {
@@ -113,6 +118,5 @@ $(function() {
         }, function(data) {});
         initialize();
     });
-
 
 });
