@@ -105,8 +105,9 @@ $(function() {
     });
 
     $("#postTweet").click(function() {
+        var tweet = $("#tweet").text();
         $.post('/postTweet', {
-            'status': JSON.stringify(tweet.substr(0, 140))
+            'status': JSON.stringify(tweet)
         }, function(data) {});
         initialize();
     });

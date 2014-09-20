@@ -177,7 +177,6 @@ exports.search0 = function(req, res) {
 };
 
 exports.postTweet = function(req, res) {
-
     // grab the tweet from the client
     var tweet = JSON.parse(req.body.status);
     twitter.post('statuses/update', {
