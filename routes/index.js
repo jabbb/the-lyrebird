@@ -81,16 +81,6 @@ exports.search = function(req, res) {
                             user: data.statuses[ii].user.screen_name
                         });
                     }
-
-                    /*// checks if there is a next word, if it is a repeat, and adds it to wordList[]
-                    if (index > -1 && index < status.length && wordList.indexOf(status[index + 1]) == -1) {
-                        if (Tlength + status[index + 1].length < 140) {
-                            wordList.push(status[index + 1].replace(/\r?\n|\r/g, ""));
-                            nameList.push(data.statuses[ii].user.name);
-                            userList.push(data.statuses[ii].user.screen_name);
-                            //dateList.push(data.statuses[i].created_at);
-                        }
-                    }*/
                 }
             }
 
@@ -162,17 +152,6 @@ exports.search0 = function(req, res) {
         // send choices to client
         console.log("wordList JSON: " + JSON.stringify(wordList));
         res.send(JSON.stringify(wordList));
-        /*{
-
-            'choice1': wordList[0],
-            'choice2': wordList[1],
-            'choice3': wordList[2],
-            'choice4': wordList[3],
-            'user1': userList[0],
-            'user2': userList[1],
-            'user3': userList[2],
-            'user4': userList[3]
-        }));*/
     })
 };
 

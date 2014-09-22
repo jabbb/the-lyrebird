@@ -2,7 +2,7 @@ body {
   background-image:url('/images/twitterClouds3.png');
   font-family: helvetica, arial, sans-serif;
   margin: 0;
-  min-width: 850px;
+  min-width: 634px;
   text-align: center;
 }
 
@@ -27,9 +27,9 @@ a:hover {
 #container1 {
   background-image:url('/images/lyrebird4.jpg');
   background-size: 100% 100%;
-  margin: 20px;
-  border: 1px solid #E3E3E3;
-  border-radius: 5px;
+  margin: 0px;
+  border-bottom: 1px solid #E3E3E3;
+
 }
 
 #quote {
@@ -37,8 +37,8 @@ a:hover {
   margin: 20px auto;
   /*color: #0000EE;*/
   background-color: #F5F8FA;
-  border: inherit;
-  border-radius: inherit;
+  border: 1px solid #E3E3E3;
+  border-radius: 5px;
   opacity: 0.8;
 
 }
@@ -49,7 +49,7 @@ a:hover {
 }
 
 #container3 {
-  margin: inherit;
+  margin: 20px auto;
   background-color: #F9F9F9;
   border: 1px solid #E3E3E3;
   border-radius: 5px;
@@ -61,7 +61,7 @@ a:hover {
   min-height: 136px;
   margin: 10px 10px 20px;
   border: inherit;
-  border-radius: inherit;
+  border-radius: 5px;
   background-color: #ffffff;
   text-align: left;
 
@@ -145,35 +145,28 @@ button:active {
 }
 
 #timeline {
-  height: 400px;
-  background-color: #F5F8FA;
-  border: 1px solid #E3E3E3;
-  border-radius: 5px;
-}
-
-#timeline-insides {
-  height: 356px;
-  background-color: #ffffff;
-  border-top: 1px solid #E3E3E3;
-  z-index: 2;
-  position: relative;
-  top: 44px;
+  height: 607px;
+  width: 490px;
+  margin: auto;
 }
 
 .twitter-timeline {
-  height: 400px;
+  height: inherit;
 }
 
 #loading {
   font-size: 25px;
 }
 
-#about {
-  margin: inherit;
-  padding: 0px 16px;
-  background-color: #F5F8FA;
-  border: 1px solid #E3E3E3;
-  border-radius: 5px;
+#footer {
   opacity: 0.7;
+  background-color: #F5F8FA;
+  border-top: 1px solid #E3E3E3;
+  margin-top: 30px;
+}
+
+#about {
+  margin: auto;
+  width: 590px;
   text-align: left;
 }
