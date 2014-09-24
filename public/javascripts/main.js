@@ -22,7 +22,7 @@ $(function() {
 
         $.get('/search0', function(data) {
             data = JSON.parse(data);
-            //$("#twitter-widget-0").width(590);
+            $("#twitter-widget-0").width(590);
 
             //$("#tweet").html("");
             $("#loading").hide();
@@ -52,7 +52,7 @@ $(function() {
 
     $("#choices").on("click", ".choice", function() {
 
-        //$("#twitter-widget-0").width(590);
+        $("#twitter-widget-0").width(590);
         $("#intro").hide();
 
         var lastWord = $(this).text();

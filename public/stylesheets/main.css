@@ -28,13 +28,13 @@ a:hover {
   background-image:url('/images/lyrebird4.jpg');
   background-size: 100% 100%;
   margin: 0px;
-  border-bottom: 1px solid #E3E3E3;
+  border-bottom: 1px solid #90C2D9;
 
 }
 
 #quote {
   width: 590px;
-  margin: 20px auto;
+  margin: 10px auto;
   /*color: #0000EE;*/
   background-color: #F5F8FA;
   border: 1px solid #E3E3E3;
@@ -45,11 +45,11 @@ a:hover {
 
 #container2 {
   width:590px;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 
 #container3 {
-  margin: 20px auto;
+  margin: 10px 0px;
   background-color: #F9F9F9;
   border: 1px solid #E3E3E3;
   border-radius: 5px;
@@ -171,6 +171,6 @@ button:active {
   background-color: #F5F8FA;
   border: 1px solid #E3E3E3;
   border-radius: 5px;
-  margin: 100px 0px 60px;
+  margin: 10px 0px 10px;
   padding: 10px;
 }
