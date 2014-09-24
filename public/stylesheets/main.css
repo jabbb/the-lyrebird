@@ -146,7 +146,7 @@ button:active {
 
 #timeline {
   height: 607px;
-  width: 490px;
+  width: 590px;
   margin: auto;
 }
 
@@ -162,11 +162,15 @@ button:active {
   opacity: 0.7;
   background-color: #F5F8FA;
   border-top: 1px solid #E3E3E3;
-  margin-top: 30px;
+  margin-top: 130px;
 }
 
 #about {
-  margin: auto;
-  width: 590px;
   text-align: left;
+  opacity: 0.7;
+  background-color: #F5F8FA;
+  border: 1px solid #E3E3E3;
+  border-radius: 5px;
+  margin: 100px 0px 60px;
+  padding: 10px;
 }
