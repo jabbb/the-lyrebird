@@ -139,6 +139,7 @@ exports.search0 = function(req, res) {
                     }
                     //if not adds to wordList[]
                 if (!hasWord()) {
+                	//console.log(data.statuses[ii].entities);
                     wordList.push({
                         word: newWord,
                         user: data.statuses[ii].user.screen_name
