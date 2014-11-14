@@ -22,7 +22,6 @@ $(function() {
 
         $.get('/search0', function(data) {
             data = JSON.parse(data);
-            $("#twitter-widget-0").width(590);
 
             //$("#tweet").html("");
             $("#loading").hide();
@@ -47,12 +46,14 @@ $(function() {
         });
     }
 
+    /*$(".stream").ready(function() {
+        $("#twitter-widget-0").width(590);
+    })*/
 
 
 
     $("#choices").on("click", ".choice", function() {
 
-        $("#twitter-widget-0").width(590);
         $("#intro").hide();
 
         var lastWord = $(this).text();
@@ -113,4 +114,23 @@ $(function() {
         initialize();
     });
 
+    /*Embed twitter widget*/
+    window.twttr = (function(d, s, id) {
+        var t, js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "javascripts/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        return window.twttr || (t = {
+            _e: [],
+            ready: function(f) {
+                t._e.push(f)
+            }
+        });
+    }(document, "script", "twitter-wjs"));
+
+
 });
+
+
