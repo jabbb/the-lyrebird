@@ -13,9 +13,10 @@ html
     #container1
       b#title The Lyrebird
       #quote
-        p <i><b>"I don't get Twitter. What do you write? I mean, what's the point anyway?"</b></i><font size="2"><br> - a friend speaking on the telephone</font>
+        //p <i><b>"I don't get Twitter. What do you write? I mean, what's the point anyway?"</b></i><font size="2"><br> - a friend speaking on the telephone</font>
         p ---
-        p Mimic all the birds in the forest.
+        p: font(size="4") Mimic all the birds in the forest.
+        p ---
     #container2
       #container3
         #tweetdiv
@@ -36,6 +37,7 @@ html
         p: b *So, what's going on here?
         p Each time you pick a word, the server searches Twitter for 4 recent instances of that word and, for each, returns the following word (which make up the 4 new choices). This way, each pair of consecutive words in your post have been posted as part of a tweet by someone somewhere at some point within the last couple hours.
         p: font(size="2") (This site uses <a href="https://github.com/rodrigopolo/minEmoji">MinEmoji</a> by Rodrigo Polo in order to display emoji in Google Chrome and <a href="https://iamceege.github.io/tooltipster/">Tooltipster</a> by Caleb Jacob and Louis Ameline to create tooltips. Thanks guys!)
+        p: font(size="2") by jjjbertsche (at) gmail (dot) com
     script(src='javascripts/jquery-1.11.1.min.js')
     script(src='javascripts/jquery.tooltipster.min.js')
     script(src='javascripts/jMinEmoji.js')
